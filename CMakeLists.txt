@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.20)
+project(a_star)
+find_package(raylib REQUIRED)
+add_executable(a_star main.cpp)
+target_link_libraries(a_star PRIVATE raylib)
