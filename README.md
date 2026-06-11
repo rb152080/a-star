@@ -7,3 +7,5 @@ cmake -B build
 cmake --build build
 ./build/a_star
 ```
+
+- leftoff 11:54
