@@ -48,8 +48,16 @@ class AStarAlgorithm
     {
         if (x < 0 || y < 0 || x >= NUM_NODES_ROW || y >= NUM_NODES_ROW)
             return nullptr;
-        return &m_grid_[y][x];
+        return &m_grid_[y][x]; // whys it not [x][y]
     }
+
+    struct OpenNode // represents a node in the priority queue
+    {
+        Node *node{};
+        bool operator<(const OpenNode& other) const {
+            
+        }
+    };
 
   public:
     AStarAlgorithm()
@@ -83,24 +91,50 @@ class AStarAlgorithm
                 node->is_obstacle)
                 continue;
             node->is_obstacle = true;
-            i++;
+            i++; // we only want this to execute if the node is set as an
+                 // obstacle
         }
     }
 
     void update() {}
 
-    void draw() {}
+    void draw()
+    {
+        for (int y{}; y < NUM_NODES_ROW; y++)
+        {
+
+            for (int x{}; x < NUM_NODES_ROW; x++)
+            {
+                const auto *node{get_node(x, y)};
+                Color color{GRAY};
+                if (node->is_obstacle)
+                    color = BLACK;
+                DrawRectangle(x * NODE_PIXEL_SIZE, y * NODE_PIXEL_SIZE,
+                              NODE_PIXEL_SIZE, NODE_PIXEL_SIZE, color);
+            }
+        }
+        DrawRectangle(m_start_->x * NODE_PIXEL_SIZE,
+                      m_start_->y * NODE_PIXEL_SIZE, NODE_PIXEL_SIZE,
+                      NODE_PIXEL_SIZE, GREEN);
+        DrawRectangle(m_end_->x * NODE_PIXEL_SIZE, m_end_->y * NODE_PIXEL_SIZE,
+                      NODE_PIXEL_SIZE, NODE_PIXEL_SIZE, RED);
+    }
 };
 
 int main()
 {
     InitWindow(1000, 1000, "A Star");
     SetTargetFPS(60);
+
+    AStarAlgorithm a_star{};
+
     while (!WindowShouldClose())
     {
         PollInputEvents();
+        a_star.update();
         BeginDrawing();
         ClearBackground(BLACK);
+        a_star.draw();
         EndDrawing();
     }
     return 0;

@@ -8,4 +8,4 @@ cmake --build build
 ./build/a_star
 ```
 
-- leftoff 11:54
+- leftoff 16:37
