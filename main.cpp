@@ -196,28 +196,26 @@ class AStarAlgorithm
     }
 
     void update()
-    { // TODO: leftoff
+    {
         if (m_is_finished)
             return;
-        if (m_discovered_nodes.empty())
+        if (m_discovered_nodes.empty()) // if there are no more nodes to go to
         {
             m_is_finished = true;
             return;
         }
-        // same as Node*
-        auto current { m_discovered_nodes.top() };
+        auto current { m_discovered_nodes.top() }; // same as Node*
         m_discovered_nodes.pop();
-        if (current->is_expanded)
-            return;
-        current->is_expanded = true;
-
         if (current == m_end)
         {
             construct_final_path();
             m_is_finished = true;
             return;
         }
+        if (current->is_expanded)
+            return;
         expand_node(current);
+        current->is_expanded = true;
     }
 
     void draw()
