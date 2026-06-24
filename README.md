@@ -2,7 +2,7 @@
 
 based on [Salar's video](https://www.youtube.com/watch?v=LCMvf_036z8)
 
-![./assets/a-star_preview.png](./assets/a-star_preview.png)
+![./images/a-star_preview.png](./images/a-star_preview.png)
 
 ## Compiling + Running the Program
 
